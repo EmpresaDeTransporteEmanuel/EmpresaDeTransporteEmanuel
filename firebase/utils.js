@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './config'
-import { onAuthStateChanged, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { onAuthStateChanged, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut  } from "firebase/auth";
 
 
 const app = initializeApp(firebaseConfig)
@@ -76,4 +76,13 @@ function withGoogle () {
 }
 
 
-export { onAuth, signUpWithEmail, signInWithEmail, withGoogle }
+function handleSignOut () {
+  signOut(auth).then(() => {
+  // Sign-out successful.
+}).catch((error) => {
+  // An error happened.
+});
+}
+
+
+export { onAuth, signUpWithEmail, signInWithEmail, withGoogle, handleSignOut }

@@ -6,7 +6,7 @@ import { useUser } from '../context/Context.js'
 import { WithoutAuth } from '../HOCs/WithoutAuth'
 import { onAuth, signInWithEmail, withGoogle } from '../firebase/utils'
 import Button from '../components/Button'
-import style from '../styles/Login.module.css'
+import style from '../styles/Auth.module.css'
 
 function Login() {
     const { user, setUserProfile } = useUser()
@@ -16,7 +16,7 @@ function Login() {
         e.preventDefault()
         withGoogle()
     }
-    function loginWithEmail (e) {
+    function loginWithEmailAndPassword (e) {
         e.preventDefault()
         const email = e.target.form[0].value
         const password = e.target.form[1].value
@@ -25,7 +25,7 @@ function Login() {
     
     useEffect(() => {
       onAuth(setUserProfile)
-      if (user) router.replace('/')
+      if (user) router.replace('/Admin')
     }, [user, setUserProfile, router]);
     return (
         <div className={style.container}>
@@ -44,7 +44,7 @@ function Login() {
                         <input className={style.input} type="password" placeholder="contraseña" />
                     </label>
                     <div className={style.buttonsContainer}>
-                        <Button style='buttonPrimary' click={loginWithEmail}>Iniciar Sesion</Button>
+                        <Button style='buttonPrimary' click={loginWithEmailAndPassword}>Iniciar Sesion</Button>
                         <Button style='buttonPrimary' click={loginWithGoogle}>Continuar con Google</Button>
                     </div>
                     <div className={style.linkForm}>Crear una cuenta? <Link href="/SignUp" ><a className={style.link}>Registrate</a></Link></div>
