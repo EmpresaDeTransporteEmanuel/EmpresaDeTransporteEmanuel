@@ -31,7 +31,7 @@ function Login() {
         <div className={style.container}>
             <main className={style.main}>
                 <h1 className={style.title}>Empresa De Transporte Emanuel</h1>
-                <Image  src="/User.svg" width="100" height="100" />
+                <Image  src="/User.svg" width="100" height="100" alt="User"/>
                 <h4 className={style.subtitle}>Administrador</h4>
                 <form className={style.form}>
                     <h4 className={style.subtitle}>REGISTRATE</h4>
