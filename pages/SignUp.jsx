@@ -26,7 +26,7 @@ function Login() {
     useEffect(() => {
       onAuth(setUserProfile)
       if (user) router.replace('/')
-    }, [user]);
+    }, [user, setUserProfile, router]);
     return (
         <div className={style.container}>
             <main className={style.main}>
