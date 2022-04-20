@@ -1,4 +1,3 @@
-import { WithAuth } from '../HOCs/WithAuth'
 
 
 
@@ -16,7 +15,7 @@ function Home() {
 
 
 
-export default WithAuth(Home)
+export default Home
 
 
 
