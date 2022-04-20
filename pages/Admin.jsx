@@ -5,7 +5,6 @@ function Admin() {
 
     return (
       <main>
-        "heññfsfs"
       </main>
     )
   }

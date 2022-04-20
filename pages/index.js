@@ -1,21 +1,17 @@
-
+import { WithAuth } from '../HOCs/WithAuth'
 
 
 function Home() {
 
   return (
     <main>
-      "heññfsfs"
+      
     </main>
   )
 }
 
 
-
-
-
-
-export default Home
+export default WithAuth(Home)
 
 
 
