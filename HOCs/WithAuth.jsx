@@ -7,12 +7,12 @@ import { onAuth } from '../firebase/utils'
 
 export function WithAuth(Component) {
     return () => {
-        const { user, setUserProfile } = useUser()
+        const { user, setUserProfile, setUserData } = useUser()
         const router = useRouter()
 
         useEffect(() => {
-            onAuth(setUserProfile)
-            if(user === null) router.replace('/Login')
+            onAuth(setUserProfile, setUserData)
+            if(user === null) router.replace('/')
         }, [user])
         return (
             <>

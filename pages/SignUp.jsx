@@ -47,7 +47,7 @@ function Login() {
                         <Button style='buttonPrimary' click={signUpWithEmailAndPassword}>Registrarme</Button>
                         <Button style='buttonPrimary' click={signUpWithGoogle}>Continuar con Google</Button>
                     </div>
-                    <div className={style.linkForm}>Ya tienes una cuenta? <Link href="/Login" ><a className={style.link}>Iniciar Sesion</a></Link></div>
+                    <div className={style.linkForm}>Ya tienes una cuenta? <Link href="/" ><a className={style.link}>Iniciar Sesion</a></Link></div>
                 </form>
             </main>
         </div>

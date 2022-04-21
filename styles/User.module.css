@@ -1,0 +1,53 @@
+
+.container {
+    box-sizing: border-box;
+    position: relative;
+    min-height: 100vh;
+    min-width: 100vw;
+    background-color: #024164;
+  
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  
+    text-align: center;
+  }
+  .box{
+    box-sizing: border-box;
+    padding-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    min-height: 163px;
+    font-size: 26px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+.paragraph {
+    text-align: center;
+    width: auto;
+
+ 
+}
+.image {
+    width: auto;
+    position: relative;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+.table {
+    box-sizing: border-box;
+    font-size: 26px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    width: 100%;
+    border-spacing: 0;
+    border-collapse: collapse;
+
+}
+.table :nth-child(n)  {
+    border: 1px solid grey;
+    border-collapse: collapse;
+    height: 38.5px;
+    padding: 0;
+}

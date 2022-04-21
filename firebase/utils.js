@@ -1,19 +1,19 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './config'
 import { onAuthStateChanged, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut  } from "firebase/auth";
-
+import { getDatabase, ref, onValue, set, child, get} from "firebase/database";
 
 const app = initializeApp(firebaseConfig)
 
 const auth = getAuth();
 const provider = new GoogleAuthProvider();
-
+const db = getDatabase(app);
 
 function onAuth(setUserProfile, setUserData) {
   return onAuthStateChanged(auth, (user) => {
     if (user) {
       setUserProfile(user)
-      // getData(user, setUserData)
+      getData(setUserData)
     } else {
       setUserProfile(user)
     }
@@ -85,4 +85,49 @@ function handleSignOut () {
 }
 
 
-export { onAuth, signUpWithEmail, signInWithEmail, withGoogle, handleSignOut }
+// -------------------------------Firebase Realtime Database------------------------------------
+
+
+
+
+const dbRef = ref(getDatabase());
+
+function getData(setUserData) {
+  get(child(dbRef, `users/`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      setUserData(snapshot.val());
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+function getSpecificData(query, setUserSpecificData) {
+
+  get(child(dbRef, `users/${query}`)).then((snapshot) => {
+    if (snapshot.exists()) {
+      setUserSpecificData(snapshot.val()) 
+    } else {
+      console.log("No data available");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+}
+
+
+
+function writeUserData (object) {
+  set(ref(db, 'users/' + object.id), object );
+}
+
+
+
+
+
+
+
+
+export { onAuth, signUpWithEmail, signInWithEmail, withGoogle, handleSignOut, getData, getSpecificData, writeUserData }

@@ -5,24 +5,30 @@ const UserContext = React.createContext()
 export function UserProvider ({ children }) {
 
 	const [user, setUser] = useState(undefined)
-	// const [userDB, setUserDB] = useState('loading')
+	const [userDB, setUserDB] = useState('loading')
+	const [specificData, setSpecificData] = useState(null)
 
 
 	function setUserProfile (userProfile) {
 		setUser(userProfile)
 	}
-	// function setUserData (userDatabase) {
-	// 	setUserDB(userDatabase)
-	// }
+	function setUserData (userDatabase) {
+		setUserDB(userDatabase)
+	}
+	function setUserSpecificData (userSpecificData) {
+		setSpecificData(userSpecificData)
+	}
 
 	const value = useMemo(()=>{
 		return ({
 			user,
-			// userDB,
+			userDB,
+			specificData,
 			setUserProfile,
-			// setUserData,
+			setUserData,
+			setUserSpecificData,
 		})
-	}, [ user ])
+	}, [ user, userDB, specificData ])
 
 	return (
 		<UserContext.Provider value={value} >
