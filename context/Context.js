@@ -5,7 +5,7 @@ const UserContext = React.createContext()
 export function UserProvider ({ children }) {
 
 	const [user, setUser] = useState(undefined)
-	const [userDB, setUserDB] = useState('loading')
+	const [userDB, setUserDB] = useState('')
 	const [specificData, setSpecificData] = useState(null)
 
 

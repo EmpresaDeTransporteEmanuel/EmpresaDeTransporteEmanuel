@@ -19,3 +19,13 @@
     background-color: white;
     border: 1px solid #024164;
 }
+.buttonConfirm {
+    color: white;
+    background-color: #ff0000;
+    border: 1px solid white;
+}
+.buttonConfirm:hover {
+    color: #ff0000;
+    background-color: white;
+    border: 1px solid #ff0000;
+}

@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 import { firebaseConfig } from './config'
 import { onAuthStateChanged, getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signInWithPopup, GoogleAuthProvider, signOut  } from "firebase/auth";
-import { getDatabase, ref, onValue, set, child, get} from "firebase/database";
+import { getDatabase, ref, onValue, set, child, get, remove} from "firebase/database";
 
 const app = initializeApp(firebaseConfig)
 
@@ -93,14 +93,22 @@ function handleSignOut () {
 const dbRef = ref(getDatabase());
 
 function getData(setUserData) {
-  get(child(dbRef, `users/`)).then((snapshot) => {
+  // get(child(dbRef, `users/`)).then((snapshot) => {
+  //   if (snapshot.exists()) {
+  //     setUserData(snapshot.val());
+  //   } else {
+  //     console.log("No data available");
+  //   }
+  // }).catch((error) => {
+  //   console.error(error);
+  // });
+  onValue(ref(db, 'users/'), (snapshot) => {
     if (snapshot.exists()) {
-      setUserData(snapshot.val());
-    } else {
-      console.log("No data available");
-    }
-  }).catch((error) => {
-    console.error(error);
+          setUserData(snapshot.val());
+        } else {
+          setUserData('');
+        }
+    
   });
 }
 
@@ -123,6 +131,11 @@ function writeUserData (object) {
   set(ref(db, 'users/' + object.id), object );
 }
 
+async function removeData (data, setUserData) {
+  await remove(ref(db, 'users/' + data));
+  getData(setUserData)
+
+}
 
 
 
@@ -130,4 +143,5 @@ function writeUserData (object) {
 
 
 
-export { onAuth, signUpWithEmail, signInWithEmail, withGoogle, handleSignOut, getData, getSpecificData, writeUserData }
+
+export { onAuth, signUpWithEmail, signInWithEmail, withGoogle, handleSignOut, getData, getSpecificData, writeUserData, removeData }

@@ -1,16 +1,17 @@
-import Button from '../components/Button'
-import { useEffect } from 'react'
+import Modal from '../components/Modal'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { WithAuth } from '../HOCs/WithAuth'
 import Link from 'next/link'
-import { handleSignOut, getData} from '../firebase/utils'
+import { handleSignOut, getData, removeData} from '../firebase/utils'
 import Image from 'next/image'
 import { useUser } from '../context/Context.js'
 import style from '../styles/Admin.module.css'
 
 function Admin() {
-    const { userDB } = useUser()
-
+    const { userDB, setUserData } = useUser()
+    const [mode, setMode] = useState(false)
+    const [itemSelect, setItemSelect] = useState('')
     const router = useRouter()
 
 
@@ -19,11 +20,21 @@ function Admin() {
         e.preventDefault()
         router.push('/AddUser')
     }
+    function remove (item) {
+        setMode(!mode) 
+        setItemSelect(item)
+    }
+    function removeConfirm () {
+        removeData(`${itemSelect}`, setUserData)
+        getData(setUserData)
+    }
+    function x () {
+        setMode(!mode)
+    }
     function signOut (e) {
         e.preventDefault()
         handleSignOut()
     }
-
 
     return (
 
@@ -34,7 +45,11 @@ function Admin() {
                 <h4 className={style.subtitle}>Administrador</h4>
                 {userDB && <ul className={style.list}>
                 {Object.keys(userDB).map((item, i)=>
-                    <Link href="validator/[User]" as ={`validator/${item}`} key={i}><a className={style.link}>{item}</a></Link>
+                    <div className={style.items} key={i}>
+                        <Link href="validator/[User]" as ={`validator/${item}`} >
+                            <a className={style.link}>{item}</a>
+                        </Link> 
+                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={()=>remove(item)} /></div> 
                 )}   
 
                 
@@ -45,6 +60,9 @@ function Admin() {
            
                 
             </main>
+            <Modal mode={mode} click={x} confirm={removeConfirm} text={`Confirma que deseas eliminar a este usuario`}>
+                
+            </Modal>
         </div>
 
     )
