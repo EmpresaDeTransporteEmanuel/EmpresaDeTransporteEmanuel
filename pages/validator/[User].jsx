@@ -23,7 +23,7 @@ function User() {
 
     return (
         <div className={style.container}>
-            <main >
+            {specificData && <main >
                 <div className={style.box}>
                     <div className={style.image}>
                         <Image src="/logo.png" width="400" height="116" alt="Escudo" ></Image>
@@ -88,7 +88,7 @@ function User() {
                 
 
 
-            </main>
+            </main> }
         </div>
     )
 }
