@@ -22,13 +22,13 @@ function User() {
     });
 
     return (
-        <div>
+        <div className={style.container}>
             <main >
                 <div className={style.box}>
                     <div className={style.image}>
                         <Image src="/logo.png" width="400" height="116" alt="Escudo" ></Image>
                     </div>
-                    <p className={style.paragraph}> <strong>VALIDACIÓN DE<br />HOJA DE RUTA</strong> <br />Autorizado por: hmamani</p>
+                    {specificData && <p className={style.paragraph}> <strong>VALIDACIÓN DE<br />HOJA DE RUTA</strong> <br />Autorizado por: {specificData.autorizadoPor}</p>}
 
                 </div>
 

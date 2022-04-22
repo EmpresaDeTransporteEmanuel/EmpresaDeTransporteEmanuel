@@ -29,6 +29,7 @@ function AddUser() {
             ruta: e.target.form[14].value,
             sustancia: e.target.form[15].value,
             id: e.target.form[16].value,
+            autorizadoPor: e.target.form[17].value,
         }
         writeUserData(object)
     }
@@ -110,6 +111,10 @@ function AddUser() {
                     </label>
                     <label>
                         ID: 
+                        <input className={style.input} type="text" placeholder="" />
+                    </label>
+                    <label>
+                        Autorizado por: 
                         <input className={style.input} type="text" placeholder="" />
                     </label>
                     <div className={style.buttonsContainer}>
