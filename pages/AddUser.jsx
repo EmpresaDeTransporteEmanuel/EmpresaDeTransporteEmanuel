@@ -1,4 +1,6 @@
 import Button from '../components/Button'
+import Error from '../components/Error'
+import Success from '../components/Success'
 import { WithAuth } from '../HOCs/WithAuth'
 import Link from 'next/link'
 import { writeUserData} from '../firebase/utils'
@@ -7,10 +9,26 @@ import { useUser } from '../context/Context.js'
 import style from '../styles/AddUser.module.css'
 
 function AddUser() {
-    const { userDB } = useUser()
+    const { userDB, setUserSuccess, success } = useUser()
 
     function save(e) {
         e.preventDefault()
+        if (
+        e.target.form[0].value.length < 3 || e.target.form[1].value.length < 3 ||
+        e.target.form[2].value.length < 3 || e.target.form[3].value.length < 3 ||
+        e.target.form[4].value.length < 3 || e.target.form[5].value.length < 3 ||
+        e.target.form[6].value.length < 3 || e.target.form[7].value.length < 3 ||
+        e.target.form[8].value.length < 3 || e.target.form[9].value.length < 3 ||
+        e.target.form[10].value.length < 3 || e.target.form[11].value.length < 3 ||
+        e.target.form[12].value.length < 3 || e.target.form[13].value.length < 3 ||
+        e.target.form[14].value.length < 3 || e.target.form[15].value.length < 3 ||
+        e.target.form[16].value.length < 3 || e.target.form[17].value.length < 3  )
+        {
+            console.log('error')
+            setUserSuccess('complete')
+            return
+        }
+        
         const object = {
             preimpreso: e.target.form[0].value,
             tramite: e.target.form[1].value,
@@ -31,10 +49,10 @@ function AddUser() {
             id: e.target.form[16].value,
             autorizadoPor: e.target.form[17].value,
         }
-        writeUserData(object)
+        writeUserData(object, setUserSuccess)
     }
 
-    console.log(userDB)
+   
     return (
 
         <div className={style.container}>
@@ -123,6 +141,10 @@ function AddUser() {
                         
                 </form>
             </main>
+    {success == 'save' && <Success>Correcto</Success>}
+    {success == 'complete' && <Error>Llene todo el formulario</Error>}
+    {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
+
         </div>
 
     )

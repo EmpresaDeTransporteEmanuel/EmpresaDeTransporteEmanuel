@@ -1,4 +1,6 @@
 import Modal from '../components/Modal'
+import Error from '../components/Error'
+import Success from '../components/Success'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { WithAuth } from '../HOCs/WithAuth'
@@ -9,7 +11,7 @@ import { useUser } from '../context/Context.js'
 import style from '../styles/Admin.module.css'
 
 function Admin() {
-    const { userDB, setUserData } = useUser()
+    const { userDB, setUserData, setUserSuccess, success } = useUser()
     const [mode, setMode] = useState(false)
     const [itemSelect, setItemSelect] = useState('')
     const router = useRouter()
@@ -20,12 +22,15 @@ function Admin() {
         e.preventDefault()
         router.push('/AddUser')
     }
+    function edit (item) {
+        router.push(`/update/${item}`)
+    }
     function remove (item) {
         setMode(!mode) 
         setItemSelect(item)
     }
     function removeConfirm () {
-        removeData(`${itemSelect}`, setUserData)
+        removeData(`${itemSelect}`, setUserData, setUserSuccess)
         getData(setUserData)
     }
     function x () {
@@ -44,13 +49,17 @@ function Admin() {
                 <Image src="/User.svg" width="100" height="100" alt="User" />
                 <h4 className={style.subtitle}>Administrador</h4>
                 {userDB && <ul className={style.list}>
-                {Object.keys(userDB).map((item, i)=>
-                    <div className={style.items} key={i}>
-                        <Link href="validator/[User]" as ={`validator/${item}`} >
-                            <a className={style.link}>{item}</a>
-                        </Link> 
-                        <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={()=>remove(item)} /></div> 
-                )}   
+                    {Object.keys(userDB).map((item, i) =>
+                        <div className={style.items} key={i}>
+                            <Link href="validator/[User]" as={`validator/${item}`} >
+                                <a className={style.link}>{item}</a>
+                            </Link>
+                            <div>
+                                <Image src="/Edit.svg" width="25" height="25" alt="User" onClick={() => edit(item)} />
+                                <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
+                            </div>
+                        </div>
+                    )}   
 
                 
                 </ul>}
@@ -63,6 +72,8 @@ function Admin() {
             <Modal mode={mode} click={x} confirm={removeConfirm} text={`Confirma que deseas eliminar a este usuario`}>
                 
             </Modal>
+            {success == 'save' && <Success>Correcto</Success>}
+    {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
         </div>
 
     )

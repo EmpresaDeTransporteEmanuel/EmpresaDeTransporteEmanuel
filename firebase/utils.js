@@ -127,12 +127,12 @@ function getSpecificData(query, setUserSpecificData) {
 
 
 
-function writeUserData (object) {
-  set(ref(db, 'users/' + object.id), object );
+function writeUserData (object, setUserSuccess) {
+  set(ref(db, 'users/' + object.id), object ).then(()=>setUserSuccess('save')).catch(()=>setUserSuccess('repeat'))
 }
 
-async function removeData (data, setUserData) {
-  await remove(ref(db, 'users/' + data));
+async function removeData (data, setUserData, setUserSuccess) {
+  await remove(ref(db, 'users/' + data)).then(()=>setUserSuccess('save')).catch(()=>setUserSuccess('repeat'));
   getData(setUserData)
 
 }
