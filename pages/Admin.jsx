@@ -61,7 +61,7 @@ function Admin() {
                 <button className={style.logout} onClick={signOut}>Cerrar Sesión</button>
                 <button className={style.add} onClick={push}>+</button>
             </main>
-            <Modal mode={mode} click={x} confirm={removeConfirm} text={`Confirma que deseas eliminar a este usuario`}></Modal>
+            <Modal mode={mode} click={x} confirm={removeConfirm} text={`Estas por eliminar a: ${itemSelect.toUpperCase()}`}></Modal>
             {success == 'save' && <Success>Correcto</Success>}
             {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
         </div>
