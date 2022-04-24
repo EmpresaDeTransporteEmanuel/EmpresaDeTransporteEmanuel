@@ -1,19 +1,20 @@
+import { writeUserData, getSpecificData } from '../../firebase/utils'
+import { useEffect } from 'react'
+import { useRouter } from 'next/router'
+import Image from 'next/image'
+import { useUser } from '../../context/Context'
+import { WithAuth } from '../../HOCs/WithAuth'
 import Button from '../../components/Button'
 import Error from '../../components/Error'
 import Success from '../../components/Success'
-import { WithAuth } from '../../HOCs/WithAuth'
-import { useRouter } from 'next/router'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { writeUserData, getSpecificData} from '../../firebase/utils'
-import Image from 'next/image'
-import { useUser } from '../../context/Context.js'
 import style from '../../styles/AddUser.module.css'
 
 function AddUser() {
+
     const { userDB, setUserSuccess, success } = useUser()
     const { specificData, setUserSpecificData } = useUser(null)
     const router = useRouter()
+
     function save(e) {
         e.preventDefault()
         const object = {
@@ -44,6 +45,7 @@ function AddUser() {
         console.log(query)
         getSpecificData(query, setUserSpecificData)
     }, []);
+
     return (
 
         <div className={style.container}>
@@ -51,96 +53,92 @@ function AddUser() {
                 <h1 className={style.title}>Empresa De Transporte Emanuel</h1>
                 <Image src="/User.svg" width="100" height="100" alt="User" />
                 <h4 className={style.subtitle}>Administrador</h4>
-                
+
                 <form className={style.form}>
                     <h4 className={style.subtitle}>AÑADIR NUEVO USUARIO</h4>
                     <label>
-                        N° de preimpreso: 
+                        N° de preimpreso:
                         <input className={style.input} type="text" placeholder={`${specificData.preimpreso}`} />
                     </label>
                     <label>
-                        N° de trámite: 
+                        N° de trámite:
                         <input className={style.input} type="text" placeholder={`${specificData.tramite}`} />
                     </label>
                     <label>
-                        Estado: 
+                        Estado:
                         <input className={style.input} type="text" placeholder={`${specificData.estado}`} />
                     </label>
                     <label>
-                        Vigencia: 
+                        Vigencia:
                         <input className={style.input} type="text" placeholder={`${specificData.vigencia}`} />
                     </label>
                     <label>
-                        Traspaso ó N° RA/ACL: 
+                        Traspaso ó N° RA/ACL:
                         <input className={style.input} type="text" placeholder={`${specificData.traspaso}`} />
                     </label>
                     <label>
-                        Movilidad Placa: 
+                        Movilidad Placa:
                         <input className={style.input} type="text" placeholder={`${specificData.placa}`} />
                     </label>
                     <label>
-                        Porteador: 
+                        Porteador:
                         <input className={style.input} type="text" placeholder={`${specificData.porteador}`} />
                     </label>
                     <label>
-                        Fecha de registro en sistema: 
+                        Fecha de registro en sistema:
                         <input className={style.input} type="text" placeholder={`${specificData.fecha}`} />
                     </label>
                     <label>
-                        Autoriza al registro: 
+                        Autoriza al registro:
                         <input className={style.input} type="text" placeholder={`${specificData.autoriza}`} />
                     </label>
                     <label>
-                        Solicitado por: 
+                        Solicitado por:
                         <input className={style.input} type="text" placeholder={`${specificData.solicitado}`} />
                     </label>
                     <label>
-                        Comprar a su proveedor: 
+                        Comprar a su proveedor:
                         <input className={style.input} type="text" placeholder={`${specificData.proveedor}`} />
                     </label>
                     <label>
-                        Para ser utilizada en: 
+                        Para ser utilizada en:
                         <input className={style.input} type="text" placeholder={`${specificData.uso}`} />
                     </label>
                     <label>
-                        Origen del transporte: 
+                        Origen del transporte:
                         <input className={style.input} type="text" placeholder={`${specificData.origen}`} />
                     </label>
                     <label>
-                        Destino del transporte: 
+                        Destino del transporte:
                         <input className={style.input} type="text" placeholder={`${specificData.destino}`} />
                     </label>
                     <label>
-                        Ruta del transporte: 
+                        Ruta del transporte:
                         <input className={style.input} type="text" placeholder={`${specificData.ruta}`} />
                     </label>
                     <label>
-                        Sustancia: 
+                        Sustancia:
                         <input className={style.input} type="text" placeholder={`${specificData.sustancia}`} />
                     </label>
                     <label>
-                        ID: 
+                        ID:
                         <input className={style.input} type="text" placeholder={`${specificData.id}`} />
                     </label>
                     <label>
-                        Autorizado por: 
+                        Autorizado por:
                         <input className={style.input} type="text" placeholder={`${specificData.autorizadoPor}`} />
                     </label>
                     <div className={style.buttonsContainer}>
                         <Button style='buttonPrimary' click={save}>Guardar</Button>
                     </div>
-                        
+
                 </form>
             </main>}
             {success == 'save' && <Success>Correcto</Success>}
             {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
 
         </div>
-
     )
-  }
-  
+}
 
-  
-  
-  export default WithAuth(AddUser) 
+export default WithAuth(AddUser) 

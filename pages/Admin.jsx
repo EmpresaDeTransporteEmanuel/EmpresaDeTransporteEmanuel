@@ -1,13 +1,13 @@
+import { handleSignOut, getData, removeData } from '../firebase/utils'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import Image from 'next/image'
+import { useUser } from '../context/Context.js'
+import { WithAuth } from '../HOCs/WithAuth'
 import Modal from '../components/Modal'
 import Error from '../components/Error'
 import Success from '../components/Success'
-import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
-import { WithAuth } from '../HOCs/WithAuth'
-import Link from 'next/link'
-import { handleSignOut, getData, removeData} from '../firebase/utils'
-import Image from 'next/image'
-import { useUser } from '../context/Context.js'
 import style from '../styles/Admin.module.css'
 
 function Admin() {
@@ -16,33 +16,30 @@ function Admin() {
     const [itemSelect, setItemSelect] = useState('')
     const router = useRouter()
 
-
-
-    function push (e) {
+    function push(e) {
         e.preventDefault()
         router.push('/AddUser')
     }
-    function edit (item) {
+    function edit(item) {
         router.push(`/update/${item}`)
     }
-    function remove (item) {
-        setMode(!mode) 
+    function remove(item) {
+        setMode(!mode)
         setItemSelect(item)
     }
-    function removeConfirm () {
+    function removeConfirm() {
         removeData(`${itemSelect}`, setUserData, setUserSuccess)
         getData(setUserData)
     }
-    function x () {
+    function x() {
         setMode(!mode)
     }
-    function signOut (e) {
+    function signOut(e) {
         e.preventDefault()
         handleSignOut()
     }
 
     return (
-
         <div className={style.container}>
             <main className={style.main}>
                 <h1 className={style.title}>Empresa De Transporte Emanuel</h1>
@@ -59,27 +56,17 @@ function Admin() {
                                 <Image src="/Delete.svg" width="25" height="25" alt="User" onClick={() => remove(item)} />
                             </div>
                         </div>
-                    )}   
-
-                
+                    )}
                 </ul>}
-            
-                    <button className={style.logout} onClick={signOut}>Cerrar Sesión</button>
-                    <button className={style.add} onClick={push}>+</button>
-           
-                
+                <button className={style.logout} onClick={signOut}>Cerrar Sesión</button>
+                <button className={style.add} onClick={push}>+</button>
             </main>
-            <Modal mode={mode} click={x} confirm={removeConfirm} text={`Confirma que deseas eliminar a este usuario`}>
-                
-            </Modal>
+            <Modal mode={mode} click={x} confirm={removeConfirm} text={`Confirma que deseas eliminar a este usuario`}></Modal>
             {success == 'save' && <Success>Correcto</Success>}
-    {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
+            {success == 'repeat' && <Error>Verifica e intenta de nuevo</Error>}
         </div>
 
     )
-  }
-  
+}
 
-  
-  
-  export default WithAuth(Admin) 
+export default WithAuth(Admin) 

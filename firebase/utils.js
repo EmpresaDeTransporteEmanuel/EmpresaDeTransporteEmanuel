@@ -20,13 +20,7 @@ function onAuth(setUserProfile, setUserData) {
   });
 }
 
-
-
-
-
-
 // ---------------------------Login, Sign Up and Sign In------------------------------------
-
 
 function signUpWithEmail (email, password) {
   createUserWithEmailAndPassword(auth, email, password)
@@ -75,7 +69,6 @@ function withGoogle () {
   });
 }
 
-
 function handleSignOut () {
   signOut(auth).then(() => {
   // Sign-out successful.
@@ -84,11 +77,7 @@ function handleSignOut () {
 });
 }
 
-
 // -------------------------------Firebase Realtime Database------------------------------------
-
-
-
 
 const dbRef = ref(getDatabase());
 
@@ -125,8 +114,6 @@ function getSpecificData(query, setUserSpecificData) {
   });
 }
 
-
-
 function writeUserData (object, setUserSuccess) {
   set(ref(db, 'users/' + object.id), object ).then(()=>setUserSuccess('save')).catch(()=>setUserSuccess('repeat'))
 }
@@ -136,12 +123,6 @@ async function removeData (data, setUserData, setUserSuccess) {
   getData(setUserData)
 
 }
-
-
-
-
-
-
 
 
 export { onAuth, signUpWithEmail, signInWithEmail, withGoogle, handleSignOut, getData, getSpecificData, writeUserData, removeData }
