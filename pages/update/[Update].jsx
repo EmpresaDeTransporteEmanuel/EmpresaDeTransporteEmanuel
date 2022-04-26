@@ -40,11 +40,92 @@ function AddUser() {
         writeUserData(object, setUserSuccess)
     }
 
+
+    function handleOnchange (e, item) {
+        switch (item) {
+            case 'preimpreso':
+                const preimpreso = {...specificData, ...{preimpreso: e.target.value}}
+                writeUserData(preimpreso, null)
+                break;
+            case 'tramite':
+                const tramite = {...specificData, ...{tramite: e.target.value}}
+                writeUserData(tramite, null)
+                break;
+            case 'estado':
+                const estado = {...specificData, ...{estado: e.target.value}}
+                writeUserData(estado, null)
+                break;
+            case 'vigencia':
+                const vigencia = { ...specificData, ...{ vigencia: e.target.value } }
+                writeUserData(vigencia, null)
+                break;
+            case 'traspaso':
+                const traspaso = { ...specificData, ...{ traspaso: e.target.value } }
+                writeUserData(traspaso, null)
+                break;
+            case 'placa':
+                const placa = { ...specificData, ...{ placa: e.target.value } }
+                writeUserData(placa, null)
+                break;
+            case 'porteador':
+                const porteador = { ...specificData, ...{ porteador: e.target.value } }
+                writeUserData(porteador, null)
+                break;
+            case 'fecha':
+                const fecha = { ...specificData, ...{ fecha: e.target.value } }
+                writeUserData(fecha, null)
+                break;
+            case 'autoriza':
+                const autoriza = { ...specificData, ...{ autoriza: e.target.value } }
+                writeUserData(autoriza, null)
+                break;
+            case 'solicitado':
+                const solicitado = { ...specificData, ...{ solicitado: e.target.value } }
+                writeUserData(solicitado, null)
+                break;
+            case 'proveedor':
+                const proveedor = {...specificData, ...{proveedor: e.target.value}}
+                writeUserData(proveedor, null)
+                break;
+            case 'uso':
+                const uso = {...specificData, ...{uso: e.target.value}}
+                writeUserData(uso, null)
+                break;
+            case 'origen':
+                const origen = { ...specificData, ...{ origen: e.target.value } }
+                writeUserData(origen, null)
+                break;
+            case 'destino':
+                const destino = { ...specificData, ...{ destino: e.target.value } }
+                writeUserData(destino, null)
+                break;
+            case 'ruta':
+                const ruta = { ...specificData, ...{ ruta: e.target.value } }
+                writeUserData(ruta, null)
+                break;
+            case 'sustancia':
+                const sustancia = { ...specificData, ...{ sustancia: e.target.value } }
+                writeUserData(sustancia, null)
+                break;
+            case 'id':
+                const id = { ...specificData, ...{ id: e.target.value } }
+                writeUserData(id, null)
+                break;
+            case 'autorizadoPor':
+                const autorizadoPor = { ...specificData, ...{ autorizadoPor: e.target.value } }
+                writeUserData(autorizadoPor, null)
+                break;
+            default:
+                break;
+        }
+            
+    }
+
     useEffect(() => {
         const query = router.query.Update
         console.log(query)
         getSpecificData(query, setUserSpecificData)
-    }, []);
+    }, [specificData]);
 
     return (
 
@@ -58,75 +139,75 @@ function AddUser() {
                     <h4 className={style.subtitle}>AÑADIR NUEVO USUARIO</h4>
                     <label>
                         N° de preimpreso:
-                        <input className={style.input} type="text" placeholder={`${specificData.preimpreso}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.preimpreso}`} onChange={(e)=>handleOnchange(e, 'preimpreso')} value={`${specificData.preimpreso}`} />
                     </label>
                     <label>
                         N° de trámite:
-                        <input className={style.input} type="text" placeholder={`${specificData.tramite}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.tramite}`} onChange={(e)=>handleOnchange(e, 'tramite')} value={`${specificData.tramite}`}/>
                     </label>
                     <label>
                         Estado:
-                        <input className={style.input} type="text" placeholder={`${specificData.estado}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.estado}`} onChange={(e)=>handleOnchange(e, 'estado')} value={`${specificData.estado}`}/>
                     </label>
                     <label>
                         Vigencia:
-                        <input className={style.input} type="text" placeholder={`${specificData.vigencia}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.vigencia}`} onChange={(e)=>handleOnchange(e, 'vigencia')} value={`${specificData.vigencia}`}/>
                     </label>
                     <label>
                         Traspaso ó N° RA/ACL:
-                        <input className={style.input} type="text" placeholder={`${specificData.traspaso}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.traspaso}`} onChange={(e)=>handleOnchange(e, 'traspaso')} value={`${specificData.traspaso}`}/>
                     </label>
                     <label>
                         Movilidad Placa:
-                        <input className={style.input} type="text" placeholder={`${specificData.placa}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.placa}`} onChange={(e)=>handleOnchange(e, 'placa')} value={`${specificData.placa}`}/>
                     </label>
                     <label>
                         Porteador:
-                        <input className={style.input} type="text" placeholder={`${specificData.porteador}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.porteador}`} onChange={(e)=>handleOnchange(e, 'porteador')} value={`${specificData.porteador}`}/>
                     </label>
                     <label>
                         Fecha de registro en sistema:
-                        <input className={style.input} type="text" placeholder={`${specificData.fecha}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.fecha}`} onChange={(e)=>handleOnchange(e, 'fecha')} value={`${specificData.fecha}`}/>
                     </label>
                     <label>
                         Autoriza al registro:
-                        <input className={style.input} type="text" placeholder={`${specificData.autoriza}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.autoriza}`} onChange={(e)=>handleOnchange(e, 'autoriza')} value={`${specificData.autoriza}`}/>
                     </label>
                     <label>
                         Solicitado por:
-                        <input className={style.input} type="text" placeholder={`${specificData.solicitado}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.solicitado}`} onChange={(e)=>handleOnchange(e, 'solicitado')} value={`${specificData.solicitado}`}/>
                     </label>
                     <label>
                         Comprar a su proveedor:
-                        <input className={style.input} type="text" placeholder={`${specificData.proveedor}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.proveedor}`} onChange={(e)=>handleOnchange(e, 'proveedor')} value={`${specificData.proveedor}`}/>
                     </label>
                     <label>
                         Para ser utilizada en:
-                        <input className={style.input} type="text" placeholder={`${specificData.uso}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.uso}`} onChange={(e)=>handleOnchange(e, 'uso')} value={`${specificData.uso}`}/>
                     </label>
                     <label>
                         Origen del transporte:
-                        <input className={style.input} type="text" placeholder={`${specificData.origen}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.origen}`} onChange={(e)=>handleOnchange(e, 'origen')} value={`${specificData.origen}`}/>
                     </label>
                     <label>
                         Destino del transporte:
-                        <input className={style.input} type="text" placeholder={`${specificData.destino}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.destino}`} onChange={(e)=>handleOnchange(e, 'destino')} value={`${specificData.destino}`}/>
                     </label>
                     <label>
                         Ruta del transporte:
-                        <input className={style.input} type="text" placeholder={`${specificData.ruta}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.ruta}`} onChange={(e)=>handleOnchange(e, 'ruta')} value={`${specificData.ruta}`}/>
                     </label>
                     <label>
                         Sustancia:
-                        <input className={style.input} type="text" placeholder={`${specificData.sustancia}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.sustancia}`} onChange={(e)=>handleOnchange(e, 'sustancia')} value={`${specificData.sustancia}`}/>
                     </label>
                     <label>
                         ID:
-                        <input className={style.input} type="text" placeholder={`${specificData.id}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.id}`} onChange={(e)=>handleOnchange(e, 'id')} value={`${specificData.id}`}/>
                     </label>
                     <label>
                         Autorizado por:
-                        <input className={style.input} type="text" placeholder={`${specificData.autorizadoPor}`} />
+                        <input className={style.input} type="text" placeholder={`${specificData.autorizadoPor}`} onChange={(e)=>handleOnchange(e, 'autorizadoPor')} value={`${specificData.autorizadoPor}`}/>
                     </label>
                     <div className={style.buttonsContainer}>
                         <Button style='buttonPrimary' click={save}>Guardar</Button>

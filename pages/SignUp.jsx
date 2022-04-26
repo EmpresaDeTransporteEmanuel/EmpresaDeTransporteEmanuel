@@ -6,10 +6,11 @@ import Image from 'next/image'
 import { useUser } from '../context/Context'
 import { WithoutAuth } from '../HOCs/WithoutAuth'
 import Button from '../components/Button'
+import Error from '../components/Error'
 import style from '../styles/Auth.module.css'
 
 function Login() {
-    const { user, setUserProfile } = useUser()
+    const { user, setUserProfile, setUserSuccess, success } = useUser()
     const router = useRouter()
 
     function signUpWithGoogle(e) {
@@ -19,6 +20,10 @@ function Login() {
 
     function signUpWithEmailAndPassword(e) {
         e.preventDefault()
+        if (e.target.form[0].value.length < 3 || e.target.form[1].value.length < 3) {
+            setUserSuccess('complete')
+            return
+        }
         const email = e.target.form[0].value
         const password = e.target.form[1].value
         signUpWithEmail(email, password)
@@ -27,7 +32,7 @@ function Login() {
     useEffect(() => {
         onAuth(setUserProfile)
         if (user) router.replace('/Admin')
-    }, [user, setUserProfile, router]);
+    }, [user, success, setUserProfile, router]);
 
     return (
         <div className={style.container}>
@@ -52,6 +57,7 @@ function Login() {
                     <div className={style.linkForm}>Ya tienes una cuenta? <Link href="/" ><a className={style.link}>Iniciar Sesion</a></Link></div>
                 </form>
             </main>
+            {success == 'complete' && <Error>Llene todo el formulario</Error>}
         </div>
     )
 }

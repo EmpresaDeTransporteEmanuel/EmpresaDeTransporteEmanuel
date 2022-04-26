@@ -7,6 +7,7 @@ export function UserProvider ({ children }) {
 	const [user, setUser] = useState(undefined)
 	const [userDB, setUserDB] = useState('')
 	const [specificData, setSpecificData] = useState(null)
+	const [specificDataEditable, setSpecificDataEditable] = useState(null)
 	const [success, setSuccess] = useState(null)
 
 
@@ -19,6 +20,9 @@ export function UserProvider ({ children }) {
 	function setUserSpecificData (userSpecificData) {
 		setSpecificData(userSpecificData)
 	}
+	function setUserSpecificDataEditable (userSpecificDataEditable) {
+		setSpecificDataEditable(userSpecificDataEditable)
+	}
 	function setUserSuccess (mode) {
 		setSuccess(mode)
 		setTimeout(()=>{ setSuccess(null)}, 4000)
@@ -29,13 +33,15 @@ export function UserProvider ({ children }) {
 			user,
 			userDB,
 			specificData,
+			specificDataEditable,
 			success,
 			setUserProfile,
 			setUserData,
 			setUserSpecificData,
+			setUserSpecificDataEditable,
 			setUserSuccess,
 		})
-	}, [ user, userDB, success, specificData ])
+	}, [ user, userDB, success, specificData, specificDataEditable ])
 
 	return (
 		<UserContext.Provider value={value} >

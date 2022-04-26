@@ -115,7 +115,9 @@ function getSpecificData(query, setUserSpecificData) {
 }
 
 function writeUserData (object, setUserSuccess) {
-  set(ref(db, 'users/' + object.id), object ).then(()=>setUserSuccess('save')).catch(()=>setUserSuccess('repeat'))
+  set(ref(db, 'users/' + object.id), object )
+  .then(()=> setUserSuccess !== null? setUserSuccess('save'): '')
+  .catch(()=>setUserSuccess('repeat'))
 }
 
 async function removeData (data, setUserData, setUserSuccess) {
