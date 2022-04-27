@@ -82,13 +82,3 @@
         color: transparent
     }
 }
-
-@media (max-height: 590px) {
-    .success {
-
-    }
-
-    .error {
-
-    }
-}
