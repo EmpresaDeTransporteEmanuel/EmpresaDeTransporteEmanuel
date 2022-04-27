@@ -1,6 +1,6 @@
 .success {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     min-height: 21px;
     /* background-color: #1eff00; */
     background-color: black;
@@ -20,7 +20,7 @@
 
 .error {
     position: fixed;
-    width: 100%;
+    width: 100vw;
     min-height: 21px;
     /* background-color: red; */
     background-color: black;
@@ -85,14 +85,10 @@
 
 @media (max-height: 590px) {
     .success {
-        position: absolute;
-        margin-top: 500px;
-        bottom: auto;
+
     }
 
     .error {
-        position: absolute;
-        margin-top: 500px;
-        bottom: auto;
+
     }
 }
